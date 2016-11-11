@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Nef-test : ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="NEF Test">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
     <title>NEF Test</title>
   </head>
 
   <body>
+    <div class="container-fluid" id="testApp">
+      <div class="row">
+        <div class="col-md-3" role="test-navigator">
+          <h3>Setup Test</h3>
+          <div class="form-group">
+            <label for="questionsAmount">Amount of Questions</label>
+            <input class="form-control" type="number" id="questionsAmount" v-model="questionsAmount">
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" @click="runTest" v-bind:disabled="testRunning">
+            Run Test
+          </button>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/holywarez/nef-test">View on GitHub</a>
+          <section class="score">
+            <p class="lead text-center">
+              (<span class="text-success">{{score}} right</span> + <span class="text-danger">{{mistakes}} wrong</span>)
+              / {{questionsAmount}} total
+            </p>
+          </section>
+        </div>
 
-          <h1 id="project_title">NEF Test</h1>
-          <h2 id="project_tagline">Test for Units 1, 2 and 3</h2>
-        </header>
+        <section class="col-md-9" role="test-container">
+          <question v-if="testRunning && currentQuestion"
+                    :description="currentQuestion"
+                    @mistake="handleMistake"
+                    @correct="handleCorrect"></question>
+
+          <section class="answers">
+            <answer v-for="answer in answers" :description="answer"></answer>
+          </section>
+        </section>
+
+      </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <section id="setupTest">
-          <h3>Setup test</h3>
-          <input type="text" name="questionsAmount" value="2" />
-          <button class="run-test">Run Test</button>
-        </section>
-        
-        <section id="testArea">
-        </section>
+    <script type="text/x-template" id="question-template">
+      <section class="question">
+        <h4>{{ description.definition }}</h4>
+        <ul class="list-unstyled">
+          <li v-for="option in description.options" @click="answerWith(option, $event)">
+            {{ option }}
+          </li>
+        </ul>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">NEF Test maintained by <a href="https://github.com/holywarez">holywarez</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+    <script src="https://unpkg.com/vue@2.0.5/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/g/lodash@4.16.6(lodash.fp.min.js+lodash.min.js)"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script src="javascripts/main.js"></script>
-  
   </body>
 </html>

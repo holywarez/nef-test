@@ -4,7 +4,7 @@ var topics = []
 topics.push({
   type: 'matches',
   combinations: [
-    ['insiencere', "Somebody that doesnt't show his emotions"],
+    ['insincere', "Somebody that doesnt't show his emotions"],
     ['arrogant', "Person who thinks that he is better than other"],
     ['stubborn', "No matter - he is right or not, he will act on his own"]
   ]
@@ -19,3 +19,74 @@ topics.push({
   ]
 })
 
+
+Vue.component('question', {
+  props: ['description'],
+  template: '#question-template',
+  methods: {
+    answerWith: function(option) {
+      if (option == this.description.requiredAnswer) {
+        this.$emit('correct')
+      } else {
+        this.$emit('mistake')
+      }
+    }
+  }
+})
+
+new Vue({
+  el: '#testApp',
+
+  data: {
+    answers: [],
+    questionsAmount: 2,
+    leftQuestions: 0,
+    testRunning: false,
+    score: 0,
+    mistakes: 0,
+    questions: []
+  },
+
+  methods: {
+    reset: function() {
+      this.leftQuestions = this.questionsAmount
+      this.score = 0
+      this.mistakes = 0
+      this.currentQuestion = null
+      this.answers = []
+    },
+
+    runTest: function() {
+      this.reset()
+      this.testRunning = true
+      this.nextQuestion()
+    },
+
+    nextQuestion: function() {
+      if (this.leftQuestions < 1) {
+        this.testRunning = false
+        return
+      }
+      this.leftQuestions--
+
+      var topic = topics[0]
+      var correctAnswer = topic.combinations[0]
+
+      this.currentQuestion = {
+        definition: correctAnswer[0],
+        requiredAnswer: correctAnswer[1],
+        options: _.map(topic.combinations, _.last)
+      }
+    },
+
+    handleMistake: function() {
+      this.mistakes++
+      this.nextQuestion()
+    },
+
+    handleCorrect: function() {
+      this.score++
+      this.nextQuestion()
+    }
+  }
+})
