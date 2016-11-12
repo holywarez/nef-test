@@ -41,7 +41,6 @@
         <section class="col-md-6" role="test-container">
           <h3 v-if="!testRunning && !answers.length">Setup test parameters and press "Run Test"</h3>
           <h3 v-if="testRunning">Choose/type correct option and press "Answer"</h3>
-          <h3 v-if="!testRunning && answers.length">Here are your results:</h3>
           <hr>
 
           <question v-if="testRunning && currentQuestion"
