@@ -75,3 +75,15 @@ topics.push({
     ['chat', "Talk in a friendly, informal way"]
   ]
 })
+
+topics.push({
+  type: 'matches',
+  reversible: true,
+  handwriting: false,
+  combinations: [
+    ['annoying, difficult', "I hope Jack doesn't come tonight. He's such <i>a pain in the neck</i>."],
+    ['very kind, generous', "She <i>has a heart of gold</i>. She'll always help anyone with anything."],
+    ['distant, unfriendly', "She's <i>as hard as nails</i>. She doesn't care who she hurts."],
+    ['shows no sympathy or fear', "My boss is rather <i>a cold fish</i>. I don't even know if he likes me or not."],
+  ]
+})

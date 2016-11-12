@@ -10,7 +10,7 @@ Vue.component('question', {
       if (option == this.description.requiredAnswer) {
         this.$emit('correct')
       } else {
-        this.$emit('mistake')
+        this.$emit('mistake', option)
       }
     }
   }
@@ -23,6 +23,11 @@ Vue.component('answer-option', {
     isText: function() { return !this.value.match(/^http/i) },
     isUrl: function() { return this.value.match(/^http/i) }
   }
+})
+
+Vue.component('incorrect-answer', {
+  props: ['description'],
+  template: '#incorrect-answer-template'
 })
 
 new Vue({
@@ -89,8 +94,9 @@ new Vue({
       }
     },
 
-    handleMistake: function() {
+    handleMistake: function(incorrectAnswer) {
       this.mistakes++
+      this.currentQuestion.incorrectAnswer = incorrectAnswer
       this.answers.push(this.currentQuestion)
       this.nextQuestion()
     },

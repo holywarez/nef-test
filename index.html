@@ -53,7 +53,7 @@
               You answered on {{ questionsAmount }} questions.
               You made <span class="text-danger">{{ mistakes }} mistakes</span>.
             </h3>
-            <answer v-for="answer in answers" :description="answer"></answer>
+            <incorrect-answer v-for="answer in answers" :description="answer"></incorrect-answer>
           </section>
         </section>
 
@@ -63,8 +63,19 @@
     <script type="text/x-template" id="option-template">
       <span class="option">
         <img class="img-responsive img-thumbnail" :src="value" v-if="isUrl()">
-        <span v-if="isText()" :class="{ 'btn btn-default btn-block': !readonly && value.length < 30 }">{{value}}</span>
+        <span v-if="isText()" :class="{ 'btn btn-default btn-block': !readonly && value.length < 30 }" v-html="value"></span>
       </span>
+    </script>
+
+    <script type="text/x-template" id="incorrect-answer-template">
+      <section class="incorrect-answer">
+        <hr>
+        <h4><answer-option :value="description.definition" :readonly="true"></answer-option></h4>
+        <h5 class="text-danger">Incorrect answer:</h5>
+        <p><answer-option :value="description.incorrectAnswer" :readonly="true"></answer-option></p>
+        <h5 class="text-success">Correct answer:</h5>
+        <p><answer-option :value="description.requiredAnswer" :readonly="true"></answer-option></p>
+      </section>
     </script>
 
     <script type="text/x-template" id="question-template">
