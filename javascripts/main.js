@@ -30,12 +30,14 @@ new Vue({
 
   data: {
     answers: [],
-    questionsAmount: 2,
+    questionsAmount: 20,
     leftQuestions: 0,
     testRunning: false,
+    currentQuestion: null,
     score: 0,
     mistakes: 0,
-    questions: []
+    questions: [],
+    optionsLimit: 6
   },
 
   methods: {
@@ -74,13 +76,16 @@ new Vue({
 
       var requiredOption = _.clone(_.sample(combinations))
 
+      combinations = _.sampleSize(combinations, this.optionsLimit - 1)
+      combinations.push(requiredOption)
+
       return {
         type: topic.type,
         reversed: reversed,
         handwriting: reversed && topic.handwriting && Math.random() * 100 < 50,
         definition: requiredOption[0],
         requiredAnswer: requiredOption[1],
-        options: _.shuffle(_.map(combinations, _.last))
+        options: _.uniq(_.shuffle(_.map(combinations, _.last)))
       }
     },
 

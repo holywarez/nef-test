@@ -20,6 +20,10 @@
             <label for="questionsAmount">Amount of Questions</label>
             <input class="form-control" type="number" id="questionsAmount" v-model="questionsAmount">
           </div>
+          <div class="form-group">
+            <label for="optionsLimit">Limit of Options</label>
+            <input class="form-control" type="number" id="optionsLimit" v-model="optionsLimit">
+          </div>
           <button class="btn btn-primary btn-lg btn-block" @click="runTest" :disabled="testRunning">
             Run Test
           </button>
@@ -43,7 +47,7 @@
                     @mistake="handleMistake"
                     @correct="handleCorrect"></question>
 
-          <section class="answers" v-if="!testRunning">
+          <section class="answers" v-if="!testRunning && currentQuestion">
             <h3>
               You answered on {{ questionsAmount }} questions.
               You made <span class="text-danger">{{ mistakes }} mistakes</span>.
