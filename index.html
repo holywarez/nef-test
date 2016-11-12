@@ -39,9 +39,9 @@
         </div>
 
         <section class="col-md-6" role="test-container">
-          <h2 v-if="!testRunning && !answers.length">Setup test parameters and press "Run Test"</h2>
-          <h2 v-if="testRunning">Choose/type correct option and press "Answer"</h2>
-          <h2 v-if="!testRunning && answers.length">Here are your results:</h2>
+          <h3 v-if="!testRunning && !answers.length">Setup test parameters and press "Run Test"</h3>
+          <h3 v-if="testRunning">Choose/type correct option and press "Answer"</h3>
+          <h3 v-if="!testRunning && answers.length">Here are your results:</h3>
           <hr>
 
           <question v-if="testRunning && currentQuestion"
@@ -73,8 +73,9 @@
         <h4>
           <answer-option :value="description.definition" :readonly="true"></answer-option>
         </h4>
+        <hr>
         <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' && !description.reversed }" v-if="!description.handwriting">
-          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-3': description.type == 'illustrations' && !description.reversed }">
+          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-12': description.type == 'illustrations' && !description.reversed }">
             <answer-option :value="option" :readonly="false"></answer-option>
           </li>
         </ul>
