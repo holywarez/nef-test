@@ -1,0 +1,13 @@
+.question .answer {
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+  .question .answer.selected {
+    font-weight: bold;
+  }
+
+    .question .answer.selected img {
+      box-shadow: 2px 2px 11px gray;
+      border: 3px solid #cccc33;
+    }

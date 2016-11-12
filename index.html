@@ -20,7 +20,7 @@
             <label for="questionsAmount">Amount of Questions</label>
             <input class="form-control" type="number" id="questionsAmount" v-model="questionsAmount">
           </div>
-          <button class="btn btn-primary btn-lg btn-block" @click="runTest" v-bind:disabled="testRunning">
+          <button class="btn btn-primary btn-lg btn-block" @click="runTest" :disabled="testRunning">
             Run Test
           </button>
 
@@ -33,6 +33,7 @@
         </div>
 
         <section class="col-md-9" role="test-container">
+          <h2>The last test of your life</h2>
           <question v-if="testRunning && currentQuestion"
                     :description="currentQuestion"
                     @mistake="handleMistake"
@@ -46,14 +47,24 @@
       </div>
     </div>
 
+    <script type="text/x-template" id="option-template">
+      <span class="option">
+        <img class="img-responsive img-thumbnail" :src="value" v-if="isUrl()">
+        <span v-if="isText()">{{value}}</span>
+      </span>
+    </script>
+
     <script type="text/x-template" id="question-template">
       <section class="question">
-        <h4>{{ description.definition }}</h4>
-        <ul class="list-unstyled">
-          <li v-for="option in description.options" @click="answerWith(option, $event)">
-            {{ option }}
+        <h4>{{ description.definition }}...</h4>
+        <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' }">
+          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-3': description.type == 'illustrations' }">
+            <answer-option :value="option"></answer-option>
           </li>
         </ul>
+        <button class="btn btn-success" :disabled="!selectedOption" @click="answerWith(selectedOption)">
+          Answer
+        </button>
       </section>
     </script>
 

@@ -4,9 +4,9 @@ var topics = []
 topics.push({
   type: 'matches',
   combinations: [
-    ['insincere', "Somebody that doesnt't show his emotions"],
+    ['insincere', "Somebody that doesn't show his emotions"],
     ['arrogant', "Person who thinks that he is better than other"],
-    ['stubborn', "No matter - he is right or not, he will act on his own"]
+    ['stubborn', "No matter — is he right or not, he acts on his own"]
   ]
 })
 
@@ -19,18 +19,30 @@ topics.push({
   ]
 })
 
-
 Vue.component('question', {
   props: ['description'],
   template: '#question-template',
+  data: function() {
+    return { selectedOption: null }
+  },
   methods: {
     answerWith: function(option) {
+      this.selectedOption = null
       if (option == this.description.requiredAnswer) {
         this.$emit('correct')
       } else {
         this.$emit('mistake')
       }
     }
+  }
+})
+
+Vue.component('answer-option', {
+  props: ['value'],
+  template: '#option-template',
+  methods: {
+    isText: function() { return !this.value.match(/^http/i) },
+    isUrl: function() { return this.value.match(/^http/i) }
   }
 })
 
@@ -67,14 +79,19 @@ new Vue({
         this.testRunning = false
         return
       }
+
       this.leftQuestions--
+      this.currentQuestion = this.obtainQuestion()
+    },
 
-      var topic = topics[0]
-      var correctAnswer = topic.combinations[0]
+    obtainQuestion: function() {
+      var topic = _.sample(topics)
+      var requiredOption = _.sample(topic.combinations)
 
-      this.currentQuestion = {
-        definition: correctAnswer[0],
-        requiredAnswer: correctAnswer[1],
+      return {
+        type: topic.type,
+        definition: requiredOption[0],
+        requiredAnswer: requiredOption[1],
         options: _.map(topic.combinations, _.last)
       }
     },
