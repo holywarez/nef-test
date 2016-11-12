@@ -15,18 +15,20 @@
     <div class="container-fluid" id="testApp">
       <div class="row">
         <div class="col-md-3" role="test-navigator">
-          <h3>Setup Test</h3>
-          <div class="form-group">
-            <label for="questionsAmount">Amount of Questions</label>
-            <input class="form-control" type="number" id="questionsAmount" v-model="questionsAmount">
-          </div>
-          <div class="form-group">
-            <label for="optionsLimit">Limit of Options</label>
-            <input class="form-control" type="number" id="optionsLimit" v-model="optionsLimit">
-          </div>
-          <button class="btn btn-primary btn-lg btn-block" @click="runTest" :disabled="testRunning">
-            Run Test
-          </button>
+          <section class="setup" v-if="!testRunning">
+            <h3>Setup Test</h3>
+            <div class="form-group">
+              <label for="questionsAmount">Amount of Questions</label>
+              <input class="form-control" type="number" id="questionsAmount" v-model="questionsAmount">
+            </div>
+            <div class="form-group">
+              <label for="optionsLimit">Limit of Options</label>
+              <input class="form-control" type="number" id="optionsLimit" v-model="optionsLimit">
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" @click="runTest" :disabled="testRunning">
+              Run Test
+            </button>
+          </section>
 
           <section class="score">
             <p class="lead text-center">
@@ -36,7 +38,7 @@
           </section>
         </div>
 
-        <section class="col-md-9" role="test-container">
+        <section class="col-md-6" role="test-container">
           <h2 v-if="!testRunning && !answers.length">Setup test parameters and press "Run Test"</h2>
           <h2 v-if="testRunning">Choose/type correct option and press "Answer"</h2>
           <h2 v-if="!testRunning && answers.length">Here are your results:</h2>
@@ -62,18 +64,18 @@
     <script type="text/x-template" id="option-template">
       <span class="option">
         <img class="img-responsive img-thumbnail" :src="value" v-if="isUrl()">
-        <span v-if="isText()">{{value}}</span>
+        <span v-if="isText()" :class="{ 'btn btn-default btn-block': !readonly && value.length < 30 }">{{value}}</span>
       </span>
     </script>
 
     <script type="text/x-template" id="question-template">
       <section class="question">
         <h4>
-          <answer-option :value="description.definition"></answer-option>
+          <answer-option :value="description.definition" :readonly="true"></answer-option>
         </h4>
         <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' && !description.reversed }" v-if="!description.handwriting">
           <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-3': description.type == 'illustrations' && !description.reversed }">
-            <answer-option :value="option"></answer-option>
+            <answer-option :value="option" :readonly="false"></answer-option>
           </li>
         </ul>
 
@@ -82,9 +84,11 @@
           <input type="text" v-model="selectedOption" class="form-control" >
         </div>
 
-        <button class="btn btn-success" :disabled="!selectedOption" @click="answerWith(selectedOption)">
+        <br>
+        <button class="btn btn-success btn-block" :disabled="!selectedOption" @click="answerWith(selectedOption)">
           Answer
         </button>
+        <br>
       </section>
     </script>
 

@@ -17,7 +17,7 @@ Vue.component('question', {
 })
 
 Vue.component('answer-option', {
-  props: ['value'],
+  props: ['value', 'readonly'],
   template: '#option-template',
   methods: {
     isText: function() { return !this.value.match(/^http/i) },
