@@ -86,6 +86,7 @@ new Vue({
 
     handleMistake: function() {
       this.mistakes++
+      this.answers.push(this.currentQuestion)
       this.nextQuestion()
     },
 

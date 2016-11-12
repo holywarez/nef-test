@@ -33,13 +33,21 @@
         </div>
 
         <section class="col-md-9" role="test-container">
-          <h2>The last test of your life</h2>
+          <h2 v-if="!testRunning && !answers.length">Setup test parameters and press "Run Test"</h2>
+          <h2 v-if="testRunning">Choose/type correct option and press "Answer"</h2>
+          <h2 v-if="!testRunning && answers.length">Here are your results:</h2>
+          <hr>
+
           <question v-if="testRunning && currentQuestion"
                     :description="currentQuestion"
                     @mistake="handleMistake"
                     @correct="handleCorrect"></question>
 
-          <section class="answers">
+          <section class="answers" v-if="!testRunning">
+            <h3>
+              You answered on {{ questionsAmount }} questions.
+              You made <span class="text-danger">{{ mistakes }} mistakes</span>.
+            </h3>
             <answer v-for="answer in answers" :description="answer"></answer>
           </section>
         </section>
@@ -59,8 +67,8 @@
         <h4>
           <answer-option :value="description.definition"></answer-option>
         </h4>
-        <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' }" v-if="!description.handwriting">
-          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-3': description.type == 'illustrations' }">
+        <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' && !description.reversed }" v-if="!description.handwriting">
+          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-3': description.type == 'illustrations' && !description.reversed }">
             <answer-option :value="option"></answer-option>
           </li>
         </ul>
