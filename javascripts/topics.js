@@ -49,6 +49,25 @@ topics.push({
 })
 
 topics.push({
+  type: 'illustrations',
+  reversible: true,
+  handwriting: false,
+  combinations: [
+    ['a temperature', 'http://media.gettyimages.com/photos/man-sick-in-bed-taking-his-temperature-picture-id85704286?k=6&m=85704286&s=170667a&w=0&h=RD3ACheFxGeDE2u0CQS7ROi0ELSJZuZ0bJel4c-ushg='],
+    ['a cough', 'http://howrid.com/wb-content/uploads/2015/09/how-to-treat-a-cough.jpg'],
+    ['a headache', 'http://reachingutopia.com/wp-content/uploads/2013/05/man-headache.jpg'],
+    ['a rash', 'http://images.wisegeek.com/woman-itching-back-rash.jpg'],
+    ['a blister', 'https://static1.squarespace.com/static/526c72d0e4b0c72bb55e640b/t/548d7eede4b0f1b25cb45f4d/1418559214325/torn+foot+blister+treatment.jpg'],
+    ['a pain (in his chest)', 'http://images.wisegeek.com/man-holding-his-chest-in-pain-near-house.jpg'],
+    ["He's being sick", 'http://i1.mirror.co.uk/incoming/article6434103.ece/ALTERNATES/s615b/Man-Vomiting.jpg'],
+    ["She's sneezing a lot", 'https://vincekotchian.com/wp-content/uploads/2015/10/M_Id_379494_Sneezing.jpg'],
+    ["Her finger is bleeding", 'https://thumbs.dreamstime.com/z/injured-finger-bleeding-open-cut-36057537.jpg'],
+    ["His ankle is swollen", 'http://orthoinfo.aaos.org/figures/A00150F08.jpg'],
+    ["Her back hurts / aches", 'http://static.kidspot.com.au/cm_assets/10233/back_pain-20150729121653.jpg~q75,dx720y432u1r1gg,c--.jpg'],
+  ]
+})
+
+topics.push({
   type: 'matches',
   reversible: true,
   handwriting: true,
