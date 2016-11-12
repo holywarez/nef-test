@@ -1,24 +1,3 @@
-
-var topics = []
-
-topics.push({
-  type: 'matches',
-  combinations: [
-    ['insincere', "Somebody that doesn't show his emotions"],
-    ['arrogant', "Person who thinks that he is better than other"],
-    ['stubborn', "No matter — is he right or not, he acts on his own"]
-  ]
-})
-
-topics.push({
-  type: 'illustrations',
-  combinations: [
-    ['Punks', 'https://s-media-cache-ak0.pinimg.com/564x/1d/c5/e6/1dc5e6b56cf185d7571ed7aa878e8065.jpg'],
-    ['Teddy Boys', 'https://static.standard.co.uk/s3fs-public/thumbnails/image/2016/05/24/09/teddyboys2405r.jpg'],
-    ['Goths', 'http://2.bp.blogspot.com/_Wvcp0LJM_HY/TL02iFD2DsI/AAAAAAAAbqg/K80sw68DOHE/s1600/Wave_Gotik_Treffen_Festival__16.jpg']
-  ]
-})
-
 Vue.component('question', {
   props: ['description'],
   template: '#question-template',
@@ -86,13 +65,22 @@ new Vue({
 
     obtainQuestion: function() {
       var topic = _.sample(topics)
-      var requiredOption = _.sample(topic.combinations)
+      var combinations = _.map(topic.combinations, _.clone)
+      var reversed = (topic.reversible && Math.random() * 100 < 50)
+
+      if (reversed) {
+        combinations = _.map(combinations, _.reverse)
+      }
+
+      var requiredOption = _.clone(_.sample(combinations))
 
       return {
         type: topic.type,
+        reversed: reversed,
+        handwriting: reversed && topic.handwriting && Math.random() * 100 < 50,
         definition: requiredOption[0],
         requiredAnswer: requiredOption[1],
-        options: _.map(topic.combinations, _.last)
+        options: _.shuffle(_.map(combinations, _.last))
       }
     },
 

@@ -56,12 +56,20 @@
 
     <script type="text/x-template" id="question-template">
       <section class="question">
-        <h4>{{ description.definition }}...</h4>
-        <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' }">
+        <h4>
+          <answer-option :value="description.definition"></answer-option>
+        </h4>
+        <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' }" v-if="!description.handwriting">
           <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-3': description.type == 'illustrations' }">
             <answer-option :value="option"></answer-option>
           </li>
         </ul>
+
+        <div v-if="description.handwriting" class="form form-inline">
+          <label>Enter your answer in lowercase here:</label>
+          <input type="text" v-model="selectedOption" class="form-control" >
+        </div>
+
         <button class="btn btn-success" :disabled="!selectedOption" @click="answerWith(selectedOption)">
           Answer
         </button>
@@ -74,6 +82,7 @@
     <script src="https://cdn.jsdelivr.net/g/lodash@4.16.6(lodash.fp.min.js+lodash.min.js)"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <script src="javascripts/topics.js"></script>
     <script src="javascripts/main.js"></script>
   </body>
 </html>
