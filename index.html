@@ -63,7 +63,13 @@
     <script type="text/x-template" id="option-template">
       <span class="option">
         <img class="img-responsive img-thumbnail" :src="value" v-if="isUrl()">
-        <span v-if="isText()" v-html="value"></span>
+        <span v-if="isText() && readonly" v-html="value"></span>
+        <div class="radio" v-if="isText() && !readonly">
+          <label>
+            <input type="radio" name="optionsRadios" :value="value" :checked="false">
+            <span v-html="value"></span>
+          </label>
+        </div>
       </span>
     </script>
 
