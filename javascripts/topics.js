@@ -52,7 +52,7 @@ topics.push({
   handwriting: true,
   combinations: [
     ['nosebleed', "an instance when blood goes from the nose"],
-    ['pinch', "grip (something, typically a person's flesh) tightly and sharply between finger and thumb"],
+    ['pinch', "grip (something, typically a person's flesh) tightly and sharply between finger and thumb - to press something tightly between finger and thumb"],
     ['heart attack', "a sudden occurrence of coronary thrombosis, typically resulting in the death of part of a heart muscle and sometimes fatal"],
     ['food poisoning', "illness caused by bacteria or other toxins in food, typically with vomiting and diarrhoea"],
     ['a cold', "a common infection in which the mucous membrane of the nose and throat becomes inflamed, typically causing running at the nose, sneezing, and a sore throat"],
@@ -144,7 +144,7 @@ topics.push({
   combinations: [
     ['badge', "A small piece of metal, plastic, or cloth with words or a design on it"],
     ['grimace', "An expression on your face that shows you are in pain"],
-    ['giggling', "Laugh in a silly way because you are amused or nervous"],
+    ['giggling', "To laugh in a silly way because you are amused or nervous"],
     ['rise eyebrows', "Move the line of hair above your eye upwards"],
     ['chat up', "Talk to somebody in a friendly way because you are attracted to them"],
     ['chat', "Talk in a friendly, informal way"]
@@ -157,8 +157,8 @@ topics.push({
   handwriting: false,
   combinations: [
     ['annoying, difficult', "I hope Jack doesn't come tonight. He's such <i>a pain in the neck</i>."],
+    ['shows no sympathy or fear', "She's <i>as hard as nails</i>. She doesn't care who she hurts."],
+    ['distant, unfriendly', "My boss is rather <i>a cold fish</i>. I don't even know if he likes me or not."],
     ['very kind, generous', "She <i>has a heart of gold</i>. She'll always help anyone with anything."],
-    ['distant, unfriendly', "She's <i>as hard as nails</i>. She doesn't care who she hurts."],
-    ['shows no sympathy or fear', "My boss is rather <i>a cold fish</i>. I don't even know if he likes me or not."],
   ]
 })

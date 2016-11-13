@@ -12,6 +12,9 @@ Vue.component('question', {
       } else {
         this.$emit('mistake', option)
       }
+    },
+    skip: function() {
+      this.$emit('mistake')
     }
   }
 })
