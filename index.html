@@ -63,7 +63,7 @@
     <script type="text/x-template" id="option-template">
       <span class="option">
         <img class="img-responsive img-thumbnail" :src="value" v-if="isUrl()">
-        <span v-if="isText()" :class="{ 'btn btn-default btn-block': !readonly && value.length < 30 }" v-html="value"></span>
+        <span v-if="isText()" v-html="value"></span>
       </span>
     </script>
 

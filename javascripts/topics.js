@@ -21,7 +21,14 @@ topics.push({
     ['wise', "adjective, He's good at giving people advice because of his knowledge and experience"],
     ['calm', "adjective, He's good at keeping his head in a crisis"],
     ['loyal', "adjective, He's good at supporting his friends"],
+  ]
+})
 
+topics.push({
+  type: 'matches',
+  reversible: true,
+  handwriting: true,
+  combinations: [
     ['possessive', "adjective, She's not very good at letting other people share her friends"],
     ['reserved', "adjective, She's not very good at showing her feelings or expressing her opinions"],
 
@@ -34,6 +41,55 @@ topics.push({
     ['bad-tempered', "adjective, He tends to get angry very easily"],
 
     ['funny', "adjective, She has a great sense of humor"],
+    ['considerate', 'adjective, Careful not to inconvenience or harm others'],
+    ['impatient', 'adjective, Having or showing a tendency to be quickly irritated or provoked'],
+  ]
+})
+
+topics.push({
+  type: 'matches',
+  reversible: true,
+  handwriting: true,
+  combinations: [
+    ['nosebleed', "an instance when blood goes from the nose"],
+    ['pinch', "grip (something, typically a person's flesh) tightly and sharply between finger and thumb"],
+    ['heart attack', "a sudden occurrence of coronary thrombosis, typically resulting in the death of part of a heart muscle and sometimes fatal"],
+    ['food poisoning', "illness caused by bacteria or other toxins in food, typically with vomiting and diarrhoea"],
+    ['a cold', "a common infection in which the mucous membrane of the nose and throat becomes inflamed, typically causing running at the nose, sneezing, and a sore throat"],
+    ['flu', "a highly contagious viral infection of the respiratory passages causing fever, severe aching, and catarrh, and often occurring in epidemics"],
+  ]
+})
+
+topics.push({
+  type: 'matches',
+  reversible: true,
+  handwriting: false,
+  combinations: [
+    ['He has <i>flu</i>', "He's got a temperature and his body aches"],
+    ["He's <i>caught a cold</i>", "He's sneezing a lot and he has a cough"],
+    ['He is <i>allergic</i> to cats', "He starts sneezing as soon as he's near one"],
+    ["He has <i>asthma</i>", "He has difficulty breathing"],
+    ["He has high (low) <i>blood pressure</i>", "It's 150 over 100"],
+    ["He's had <i>a heart attack</i>", "His right side is paralyzed and he can't speak"],
+    ["He's had <i>a stroke</i>", "He dropped a chair on it and now there's a blue mark"],
+    ["He has <i>food poisoning</i>", "He ate some prawns that weren't fresh"],
+    ["He's <i>twisted / sprained</i> his ankle", "He felt badly and now it's swollen"],
+    ["He's <i>burnt</i> himself", "He was overweight, a smoker, and very highly stressed"],
+    ["He has <i>a bruise</i> on his toe", "He touched the iron when it was on"],
+  ]
+})
+
+topics.push({
+  type: 'matches',
+  reversible: true,
+  handwriting: false,
+  combinations: [
+    ["She is unconscious", "She's breathing but her eyes are closed and she can't hear or feel anything"],
+    ["She has a sore throat", "It hurts when she talks or shallows food"],
+    ["She has diarrhoea", "She's been to the toilet five times this morning"],
+    ["She feels sick", "She wants to be sick / vomit"],
+    ["She fainted", "It was so hot on the train that she lost consciousness"],
+    ["She feels dizzy", "She feels that everything is spinning round"],
   ]
 })
 
