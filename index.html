@@ -71,9 +71,9 @@
       <section class="incorrect-answer">
         <hr>
         <h4><answer-option :value="description.definition" :readonly="true"></answer-option></h4>
-        <h5 class="text-danger">Incorrect answer:</h5>
+        <h5 class="text-danger">Wrong answer:</h5>
         <p><answer-option :value="description.incorrectAnswer" :readonly="true"></answer-option></p>
-        <h5 class="text-success">Correct answer:</h5>
+        <h5 class="text-success">Right answer:</h5>
         <p><answer-option :value="description.requiredAnswer" :readonly="true"></answer-option></p>
       </section>
     </script>
@@ -84,8 +84,8 @@
           <answer-option :value="description.definition" :readonly="true"></answer-option>
         </h4>
         <hr>
-        <ul class="list-unstyled" :class="{ row: description.type == 'illustrations' && !description.reversed }" v-if="!description.handwriting">
-          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option, 'col-md-12': description.type == 'illustrations' && !description.reversed }">
+        <ul class="list-unstyled" v-if="!description.handwriting">
+          <li class="answer" v-for="option in description.options" @click="selectedOption = option" :class="{ selected: selectedOption == option }">
             <answer-option :value="option" :readonly="false"></answer-option>
           </li>
         </ul>
