@@ -37,6 +37,8 @@ new Vue({
   el: '#testApp',
 
   data: {
+    topicCategories: topicCategories,
+    selectedCategories: topicCategories,
     answers: [],
     questionsAmount: 20,
     leftQuestions: 0,
@@ -45,6 +47,7 @@ new Vue({
     score: 0,
     mistakes: 0,
     questions: [],
+    topics: [],
     optionsLimit: 6
   },
 
@@ -55,9 +58,15 @@ new Vue({
       this.mistakes = 0
       this.currentQuestion = null
       this.answers = []
+      scope = this
+
+      this.topics = _.filter(window.topics, function(topic) {
+        return _.includes(scope.selectedCategories, topic.category)
+      })
     },
 
     runTest: function() {
+      if (!this.selectedCategories.length) return
       this.reset()
       this.testRunning = true
       this.nextQuestion()
@@ -74,7 +83,8 @@ new Vue({
     },
 
     obtainQuestion: function() {
-      var topic = _.sample(topics)
+      var topic = _.sample(this.topics)
+      if (!topic) return
       var combinations = _.map(topic.combinations, _.clone)
       var reversed = (topic.reversible && Math.random() * 100 < 50)
 

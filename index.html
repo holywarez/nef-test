@@ -25,6 +25,17 @@
               <label for="optionsLimit">Limit of Options</label>
               <input class="form-control" type="number" id="optionsLimit" v-model="optionsLimit">
             </div>
+
+            <section class="categories">
+              <h4>Topics</h4>
+              <div class="checkbox" v-for="category in topicCategories">
+                <label>
+                  <input type="checkbox" v-model="selectedCategories" :value="category">
+                  {{category}}
+                </label>
+              </div>
+            </section>
+
             <button class="btn btn-primary btn-lg btn-block" @click="runTest" :disabled="testRunning">
               Run Test
             </button>

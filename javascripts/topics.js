@@ -417,3 +417,5 @@ topics.push({
     ['match', "Ruth bought a red handbag to _______ her red shoes"],
   ]
 })
+
+window.topicCategories = _.uniq(_.map(topics, 'category'))
