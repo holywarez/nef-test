@@ -20,7 +20,7 @@ Vue.component('question', {
 })
 
 Vue.component('answer-option', {
-  props: ['value', 'readonly'],
+  props: ['value', 'readonly', 'selectedAnswer'],
   template: '#option-template',
   methods: {
     isText: function() { return !this.value.match(/^http/i) },
@@ -38,9 +38,13 @@ new Vue({
 
   data: {
     topicCategories: topicCategories,
-    selectedCategories: topicCategories,
     answers: [],
-    questionsAmount: 20,
+    settings: {
+      questionsAmount: 20,
+      optionsLimit: 6,
+      selectedCategories: topicCategories,
+      handwriting: true,
+    },
     leftQuestions: 0,
     testRunning: false,
     currentQuestion: null,
@@ -48,12 +52,11 @@ new Vue({
     mistakes: 0,
     questions: [],
     topics: [],
-    optionsLimit: 6
   },
 
   methods: {
     reset: function() {
-      this.leftQuestions = this.questionsAmount
+      this.leftQuestions = this.settings.questionsAmount
       this.score = 0
       this.mistakes = 0
       this.currentQuestion = null
@@ -61,12 +64,12 @@ new Vue({
       scope = this
 
       this.topics = _.filter(window.topics, function(topic) {
-        return _.includes(scope.selectedCategories, topic.category)
+        return _.includes(scope.settings.selectedCategories, topic.category)
       })
     },
 
     runTest: function() {
-      if (!this.selectedCategories.length) return
+      if (!this.settings.selectedCategories.length) return
       this.reset()
       this.testRunning = true
       this.nextQuestion()
@@ -94,13 +97,16 @@ new Vue({
 
       var requiredOption = _.clone(_.sample(combinations))
 
-      combinations = _.sampleSize(combinations, this.optionsLimit - 1)
+      combinations = _.sampleSize(combinations, this.settings.optionsLimit - 1)
       combinations.push(requiredOption)
 
       return {
         type: topic.type,
         reversed: reversed,
-        handwriting: reversed && topic.handwriting && Math.random() * 100 < 50,
+        handwriting: reversed &&
+          this.settings.handwriting &&
+          topic.handwriting &&
+          Math.random() * 100 < 50,
         definition: requiredOption[0],
         requiredAnswer: requiredOption[1],
         options: _.uniq(_.shuffle(_.map(combinations, _.last)))
